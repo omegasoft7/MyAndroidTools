@@ -700,4 +700,26 @@ public class Tools {
 		view.setText(Html.fromHtml(htmlString));
 		view.setMovementMethod(LinkMovementMethod.getInstance());
 	}
+	
+	public static void ShowAfterloadActivity() {
+		//		//show after fully load of layers
+		ViewTreeObserver vto = list.getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+			@SuppressLint("NewApi")
+			@Override
+			public void onGlobalLayout() {
+
+				//Do something
+
+				ViewTreeObserver obs = list.getViewTreeObserver();
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+			}
+		});
+	}
 }
